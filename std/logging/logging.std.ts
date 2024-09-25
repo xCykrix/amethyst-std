@@ -1,12 +1,11 @@
-import { Serializers } from './serializer.ts';
-import { SetSerializeStruct } from './struct/set.ts';
-import { Transporter, TransporterOptions } from './transporter.ts';
-import { Transport, TransportSeverity } from './base/transport.ts';
-import { MapSerializeStruct } from './struct/map.ts';
+import { SetSerializeStruct } from './serializers/set.ts';
+import { MapSerializeStruct } from './serializers/map.ts';
+import { Transport } from './base/transport.ts';
 import { Serializer } from './base/serialize.ts';
+import { LoggingSeverity, Transporter, TransporterOptions } from './lib/transporter.ts';
+import { Serializers } from './lib/serializer.ts';
 
-// noinspection JSUnusedGlobalSymbols
-class Log {
+export class Logging {
   private readonly serializers = new Serializers();
   private readonly transporter: Transporter;
 
@@ -43,10 +42,10 @@ class Log {
   /**
    * Specific call to the Transporter APIs.
    *
-   * @param level The {@link TransportSeverity} to apply.
+   * @param level The {@link LoggingSeverity} to apply.
    * @param context A spread capture of data contexts to transmit.
    */
-  public call(level: TransportSeverity, ...context: unknown[]): void {
+  public call(level: LoggingSeverity, ...context: unknown[]): void {
     this.transporter.dispatch(level, context);
   }
 
@@ -55,7 +54,7 @@ class Log {
    * @param context A spread capture of data contexts to transmit.
    */
   public trace(...context: unknown[]): void {
-    this.call(TransportSeverity.TRACE, ...context);
+    this.call(LoggingSeverity.TRACE, ...context);
   }
 
   /**
@@ -63,7 +62,7 @@ class Log {
    * @param context A spread capture of data contexts to transmit.
    */
   public inform(...context: unknown[]): void {
-    this.call(TransportSeverity.INFORM, ...context);
+    this.call(LoggingSeverity.INFORM, ...context);
   }
 
   /**
@@ -71,7 +70,7 @@ class Log {
    * @param context A spread capture of data contexts to transmit.
    */
   public warning(...context: unknown[]): void {
-    this.call(TransportSeverity.WARNING, ...context);
+    this.call(LoggingSeverity.WARNING, ...context);
   }
 
   /**
@@ -79,7 +78,7 @@ class Log {
    * @param context A spread capture of data contexts to transmit.
    */
   public severe(...context: unknown[]): void {
-    this.call(TransportSeverity.SEVERE, ...context);
+    this.call(LoggingSeverity.SEVERE, ...context);
   }
 
   /**
@@ -87,8 +86,6 @@ class Log {
    * @param context A spread capture of data contexts to transmit.
    */
   public fatal(...context: unknown[]): void {
-    this.call(TransportSeverity.FATAL, ...context);
+    this.call(LoggingSeverity.FATAL, ...context);
   }
 }
-
-export { Log, TransportSeverity };

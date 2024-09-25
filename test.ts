@@ -1,9 +1,9 @@
-import { Log, TransportSeverity } from './std/logging/log.std.ts';
+import { Logging, LoggingSeverity } from './std/logging/logging.std.ts';
 
-const logger = new Log(
+const logger = new Logging(
   {
     scope: 'cli',
-    level: TransportSeverity.TRACE,
+    level: LoggingSeverity.TRACE,
   },
   [],
   [],

@@ -1,5 +1,5 @@
-import { TransporterOptions } from '../transporter.ts';
-import { Serializers } from '../serializer.ts';
+import { Serializers } from '../lib/serializer.ts';
+import { LoggingSeverity, TransporterOptions } from '../lib/transporter.ts';
 
 /**
  * Abstract Transport Implementation.
@@ -16,17 +16,9 @@ export abstract class Transport {
     this.transporterOptions = options;
   }
 
-  public abstract impl(serializing: Serializers, level: TransportSeverity, scope: string, context: unknown[], date: Date): void;
+  public abstract impl(serializing: Serializers, level: LoggingSeverity, scope: string, context: unknown[], date: Date): void;
 }
 
 export interface TransportOptions {
   _?: null;
-}
-
-export enum TransportSeverity {
-  FATAL,
-  SEVERE,
-  WARNING,
-  INFORM,
-  TRACE,
 }

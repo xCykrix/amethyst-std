@@ -1,5 +1,5 @@
-import { Transport, TransportSeverity } from './base/transport.ts';
-import { ConsoleTransport } from './transport/console.ts';
+import { Transport } from '../base/transport.ts';
+import { ConsoleTransport } from '../transports/console.ts';
 import { Serializers } from './serializer.ts';
 
 export class Transporter {
@@ -43,10 +43,10 @@ export class Transporter {
   /**
    * Dispatch the context to the Transport.
    *
-   * @param level The {@link TransportSeverity}.
+   * @param level The {@link LoggingSeverity}.
    * @param context A spread capture of data contexts to transmit.
    */
-  public dispatch(level: TransportSeverity, context: unknown[]): void {
+  public dispatch(level: LoggingSeverity, context: unknown[]): void {
     this.transports.forEach((transport) => {
       transport.impl(this.serializers, level, this.options.scope, context, new Date());
     });
@@ -55,5 +55,13 @@ export class Transporter {
 
 export interface TransporterOptions {
   scope: string;
-  level: TransportSeverity;
+  level: LoggingSeverity;
+}
+
+export enum LoggingSeverity {
+  FATAL,
+  SEVERE,
+  WARNING,
+  INFORM,
+  TRACE,
 }

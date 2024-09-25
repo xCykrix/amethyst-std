@@ -1,4 +1,4 @@
-import { Serializers } from '../serializer.ts';
+import { Serializers } from '../lib/serializer.ts';
 
 /**
  * Abstract Serializer Implementation.

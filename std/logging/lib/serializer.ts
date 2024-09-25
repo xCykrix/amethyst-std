@@ -1,4 +1,4 @@
-import { Serializer } from './base/serialize.ts';
+import { Serializer } from '../base/serialize.ts';
 
 export class Serializers {
   protected serializers: Set<Serializer> = new Set();

@@ -1,4 +1,5 @@
 // Logging API
-export { Log, TransportSeverity } from './std/logging/log.std.ts';
+export { Logging } from './std/logging/logging.std.ts';
+export { LoggingSeverity } from './std/logging/lib/transporter.ts';
 
 // ...
