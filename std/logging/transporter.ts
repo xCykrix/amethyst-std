@@ -1,4 +1,5 @@
-import { ConsoleTransport } from '../transport/console.ts';
+import { Transport, TransportSeverity } from './base/transport.ts';
+import { ConsoleTransport } from './transport/console.ts';
 import { Serializers } from './serializer.ts';
 
 export class Transporter {
@@ -42,48 +43,17 @@ export class Transporter {
   /**
    * Dispatch the context to the Transport.
    *
-   * @param level The {@link TransporterSeverity}.
+   * @param level The {@link TransportSeverity}.
    * @param context A spread capture of data contexts to transmit.
    */
-  public dispatch(level: TransporterSeverity, context: unknown[]): void {
+  public dispatch(level: TransportSeverity, context: unknown[]): void {
     this.transports.forEach((transport) => {
       transport.impl(this.serializers, level, this.options.scope, context, new Date());
     });
   }
 }
 
-/**
- * Abstract Transport Implementation.
- */
-export abstract class Transport {
-  protected options: TransportOptions;
-  protected transporterOptions: TransporterOptions | null = null;
-
-  // noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
-  public constructor(options: TransportOptions) {
-    this.options = options;
-  }
-
-  public setTransporterOptions(options: TransporterOptions): void {
-    this.transporterOptions = options;
-  }
-
-  public abstract impl(serializing: Serializers, level: TransporterSeverity, scope: string, context: unknown[], date: Date): void;
-}
-
 export interface TransporterOptions {
   scope: string;
-  level: TransporterSeverity;
-}
-
-export interface TransportOptions {
-  _?: null;
-}
-
-export enum TransporterSeverity {
-  FATAL,
-  SEVERE,
-  WARNING,
-  INFORM,
-  TRACE,
+  level: TransportSeverity;
 }

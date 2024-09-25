@@ -1,3 +1,5 @@
+import { Serializer } from './base/serialize.ts';
+
 export class Serializers {
   protected serializers: Set<Serializer> = new Set();
 
@@ -26,34 +28,12 @@ export class Serializers {
   /**
    * Adds a {@link Serializer} to the current context.
    *
-   * @param serializer The {@link Serializer} to add.
+   * @param serializers A spread capture of {@link Serializer} to add.
    */
-  public addSerializer(serializer: Serializer): void {
-    serializer.update(this);
-    this.serializers.add(serializer);
+  public addSerializers(...serializers: Serializer[]): void {
+    for (const serializer of serializers) {
+      serializer.update(this);
+      this.serializers.add(serializer);
+    }
   }
-}
-
-/**
- * Abstract Serializer Implementation.
- */
-export abstract class Serializer {
-  protected serializing: Serializers | null = null;
-
-  /**
-   * Apply the Serializing Context.
-   *
-   * @param serializing The {@link Serializers} context.
-   * @internal
-   */
-  public update(serializing: Serializers): void {
-    this.serializing = serializing;
-  }
-
-  /**
-   * Apply the serialization to a data construct.
-   *
-   * @param construct A spread capture of data contexts to transmit.
-   */
-  public abstract serialize(construct: unknown): string | null;
 }

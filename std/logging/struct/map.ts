@@ -1,20 +1,12 @@
-import { Serializer } from '../util/serializer.ts';
+import { Serializer } from '../base/serialize.ts';
 
 /**
  * Built-in Structure Serializer.
  *
  * Handles: Set, Map
  */
-export class StructSerializer extends Serializer {
+export class MapSerializeStruct extends Serializer {
   public override serialize(construct: unknown): string | null {
-    // Process Set Instances.
-    if (construct instanceof Set) {
-      const set = Array.from(construct.values()).map((v) => {
-        return this.serializing!.execute(v);
-      });
-      return `SerialSet:{ ${set.join(', ')} }`;
-    }
-
     // Process Map Instances.
     if (construct instanceof Map) {
       const map = Array.from(construct.entries()).map((v) => {

@@ -1,4 +1,3 @@
-
 # amethyst-std
 
 ---
@@ -12,6 +11,7 @@ Standard Context Fillers and APIs for Deno (and Web).
 ### Standard Libraries
 
 - Logging API
+
 ```typescript
-import { Log, TransporterSeverity } from 'jsr:@amethyst/standard'
+import { Log, TransporterSeverity } from 'jsr:@amethyst/standard';
 ```
