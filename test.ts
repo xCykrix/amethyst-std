@@ -1,16 +1,15 @@
-import { Logging, LoggingSeverity } from './std/logging/logging.std.ts';
+import { Logging } from './std/logging/logging.mod.ts';
 
-const logger = new Logging(
-  {
-    scope: 'cli',
-    level: LoggingSeverity.TRACE,
-  },
-  [],
-  [],
-);
+const logging = new Logging()
+  .createConsoleLogger('DEBUG')
+  .createFileLogger('WARN')
+  .createDefaultLoggerVariants()
+  .build();
 
-logger.trace('Debuggable Trace!');
-logger.inform('Information!');
-logger.warning('Uh oh! Something odd happened.');
-logger.severe('A severe error occurred!');
-logger.fatal('A fatal error occurred!');
+const frontend = logging.getLogger('frontend');
+
+frontend.debug('fe debug');
+frontend.info('fe info');
+frontend.warn('fe warn');
+frontend.error('fe error');
+frontend.critical('fe critical');

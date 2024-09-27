@@ -6,21 +6,19 @@
   // Compiler Options
   "compilerOptions": {
     "lib": [
-      "dom.asynciterable",
-      "deno.worker",
+      "deno.unstable",
       "deno.ns",
-      "deno.unstable"
+      "deno.worker",
+      "dom.asynciterable"
     ],
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "alwaysStrict": true,
     "exactOptionalPropertyTypes": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noStrictGenericChecks": false,
     "noPropertyAccessFromIndexSignature": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
@@ -32,9 +30,7 @@
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
     "allowJs": false,
-    "checkJs": false,
-    "suppressExcessPropertyErrors": false,
-    "suppressImplicitAnyIndexErrors": false
+    "checkJs": false
   },
 
   // Linting Options
@@ -48,10 +44,20 @@
         "eqeqeq",
         "explicit-function-return-type",
         "explicit-module-boundary-types",
+        "guard-for-in",
+        "no-console",
         "no-const-assign",
         "no-eval",
+        "no-external-import",
+        "no-self-compare",
+        "no-sparse-arrays",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal",
         "no-undef",
-        "prefer-ascii"
+        "prefer-ascii",
+        "single-var-declarator",
+        "triple-slash-reference",
+        "verbatim-module-syntax"
       ]
     }
   },
@@ -59,12 +65,13 @@
   // Formatting Options
   "fmt": {
     "useTabs": false,
-    "lineWidth": 255,
+    "lineWidth": 512,
     "indentWidth": 2,
+    "semiColons": true,
     "singleQuote": true,
     "proseWrap": "always"
   },
 
-  // Imports
-  "imports": { "@std/fmt": "jsr:@std/fmt@^1.0.2" }
+  // Import Mapping
+  "imports": { "@std/assert": "jsr:@std/assert@^1.0.6", "@std/fmt": "jsr:@std/fmt@^1.0.2", "@std/log": "jsr:@std/log@^0.224.8", "@std/testing": "jsr:@std/testing@^1.0.3" }
 }
